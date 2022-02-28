@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeu index{% endblock %}
+
+{% block body %}
+    <h1>Jeu index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Year</th>
+                <th>Rating</th>
+                <th>Actions</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jeu in jeux %}
+            <tr>
+                <td>{{ jeu.id }}</td>
+                <td>{{ jeu.name }}</td>
+                <td>{{ jeu.description }}</td>
+                <td>{{ jeu.year }}</td>
+                <td>{{ jeu.rating }}</td>
+                <td>
+                    <a href="{{ path('jeu_show', {'id': jeu.id}) }}">Show</a>
+                    <a href="{{ path('jeu_edit', {'id': jeu.id}) }}">Edit</a>
+                </td>
+                <td>{{ include('jeu/_delete_form.html.twig') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('jeu_new') }}">Create new</a>
+{% endblock %}
